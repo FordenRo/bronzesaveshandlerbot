@@ -1,5 +1,3 @@
-from asyncio import create_task
-
 from aiogram import Bot
 from aiogram.filters import Command
 from aiogram.filters.command import CommandException
@@ -30,7 +28,7 @@ class MyCommand(Command):
             command = await self.parse_command(text=text, bot=bot)
         except CommandException:
             return False
-        print(message.text)
+        await message.delete()
 
         if self.thread_id and message.message_thread_id != self.thread_id:
             await message.answer('Команда не может быть использована в этой теме')
